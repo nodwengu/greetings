@@ -1,0 +1,33 @@
+body {
+    background-color: aquamarine;
+}
+.container {
+    width: 60%;
+    margin: auto;
+}
+
+table,th,td {
+    width: 10%;
+  }
+  
+  caption { 
+    display: table-caption;
+  }
+
+  .count_text {
+      font-size: 2em;
+  }
+
+.my-radio {
+    margin: 0 65px 0 0
+}
+
+
+
+@media(min-width:800px){
+    /* Other css is here still */
+    body {
+        background-color: pink;
+    }
+  
+}
