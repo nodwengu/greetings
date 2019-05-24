@@ -6,45 +6,101 @@
    <meta http-equiv="X-UA-Compatible" content="ie=edge">
    <title>Document</title>
    
+   <link rel="stylesheet" href="grid-style.css">
    <link rel="stylesheet" href="greet.css">
 </head>
 <body>
     <div class="container">
-        <table>
+        <!-- <table style="margin: 0 0 5% 0">
             <caption><h1>Greeting</h1></caption>
             <tr>
                <td>
                   <label for="name">Name</label>
                </td>
                <td>
-                  <input type="text" id="the_name" class="the_name">
+                  <input type="text" id="the_name" class="the_name" value="">
                </td>
                <td class="count_text">0</td>
             </tr>
             <tr>
                <td></td>
-               <td style="text-align: right"><input type="button" value="Greet Me" class="greetme-btn"></td>
+               <td style="text-align: right; padding: 5% 0 0 0;"><input type="button" value="Greet Me" class="greetme-btn"></td>
             </tr>
+            
            
-         </table>
+         </table> -->
 
-         <div class="radioBtn" style="display: flex;">
+         <!-- <div class="radioBtn" style="display: flex; margin: 0 0 5% 0;">
             <div class="my-radio">
-                  <input type="radio"><br>
+                  <input type="radio" name="languageRadio" class="languageRadio" value="english"><br>
                   <label for="english">English</label>
             </div>
             <div class="my-radio">
-                  <input type="radio"><br>
-                  <label for="english">English</label>
+                  <input type="radio" name="languageRadio" class="languageRadio" value="afrikaans"><br>
+                  <label for="english">Afrikaans</label>
             </div>
             <div class="my-radio">
-                  <input type="radio"><br>
-                  <label for="english">English</label>
+                  <input type="radio" name="languageRadio" class="languageRadio" value="isixhosa"><br>
+                  <label for="english">isixhosa</label>
             </div>
+         </div> -->
+
+         <!-- <div class="greetMsg">
+
+         </div> -->
+
+         <div class="row">
+            <h1 class="center">Greetings</h1>
+            <div class="col-4-sm right">
+               <span>Name</span>
+            </div>
+            <div class="col-4-sm">
+               <input type="text" id="the_name" class="the_name" value="">
+            </div>
+            <div class="col-4-sm count_text">0</div>
          </div>
 
-         <div class="greetMsg">
+         <div class="row">
+            <div class="col-8-sm right" id="my_buttons">
+               <input type="button" value="Greet Me" class="greetme-btn">
+               <input type="reset" value="Reset Counter" class="resetCounter">
+            </div>
+         
+         </div>
 
+         <div class="row">
+               <div class="col-1-sm">
+                   
+               </div>
+            <div class="col-3-sm center">
+               <div class="my-radio">
+                  <input type="radio" name="languageRadio" class="languageRadio" value="english"><br>
+                  <label for="english">English</label>
+               </div>
+            </div>
+            <div class="col-3-sm center">
+               <div class="my-radio">
+                  <input type="radio" name="languageRadio" class="languageRadio" value="afrikaans"><br>
+                  <label for="english">Afrikaans</label>
+               </div>
+            </div>
+            <div class="col-3-sm center">
+               <div class="my-radio">
+                  <input type="radio" name="languageRadio" class="languageRadio" value="isixhosa"><br>
+                  <label for="english">isixhosa</label>
+               </div>
+            </div>
+            <div class="col-1-sm">
+                   
+               </div>
+         </div>
+
+         <div class="row">
+            <div class="col-1-sm"></div>
+            <div class="col-9-sm">
+               <div class="greetMsg center" style="font-size: 2em;"></div>
+            </div>
+            <div class="col-2-sm"></div>
          </div>
 
     </div>

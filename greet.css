@@ -1,25 +1,60 @@
 body {
-    background-color: aquamarine;
+    /* background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_dlgBXMY6h6gFNn0fucDN5VAXMWjfvjXWZXlBH5Mo4nQEndRutg');
+        background-size: cover; */
+        font-size: 20px;
 }
-.container {
-    width: 60%;
-    margin: auto;
-}
-
-table,th,td {
-    width: 10%;
-  }
-  
-  caption { 
-    display: table-caption;
-  }
 
   .count_text {
-      font-size: 2em;
+      font-size: 1.5em;
+      text-align: center;
   }
 
-.my-radio {
-    margin: 0 65px 0 0
+.container {
+    width: 90%;
+    margin: auto;
+    background: darkgrey;
+    padding: 0 0 90% 0;
+}
+
+.the_name {
+    height: 2em;
+}
+
+.greetme-btn {
+    background-color: #555555;
+    border: none;
+    color: white;
+    padding: 5px;
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 3px;
+    outline:none;
+
+    width: 100%;
+    margin: 0px -57px 20px 0px;
+}
+
+.resetCounter {
+    background-color: #555555;
+    border: none;
+    color: white;
+    padding: 5px;
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 3px;
+    outline:none;
+
+    width: 100%;
+    margin: 0px -57px 0 0px;
+}
+
+input[type=radio] {
+	height: 20px;
+    width: 20px;
 }
 
 
@@ -27,7 +62,29 @@ table,th,td {
 @media(min-width:800px){
     /* Other css is here still */
     body {
-        background-color: pink;
+        background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_dlgBXMY6h6gFNn0fucDN5VAXMWjfvjXWZXlBH5Mo4nQEndRutg');
+        background-size: cover;
+    }
+
+    .container {
+        width: 50%;
+        margin: auto;
+        background: darkgrey;
+        padding: 0 0 13% 0;
+    }
+
+    .count_text {
+        text-align: left;
+    }
+
+   .resetCounter {
+        width: 33%;
+        margin: 0px 0px 0 0px;
+    }
+
+    .greetme-btn {
+        width: 33%;
+        margin: 0px 0px 0 0px;
     }
   
 }
