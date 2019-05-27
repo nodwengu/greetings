@@ -7,6 +7,9 @@ body {
   .count_text {
       font-size: 1.5em;
       text-align: center;
+      position: relative;
+    bottom: 7px;
+    left: 10px;
   }
 
 .container {

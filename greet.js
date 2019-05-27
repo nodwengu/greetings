@@ -9,75 +9,73 @@ var resetCounterElem = document.querySelector('.resetCounter');
 // var afrikaansCounter = 0;
 // var isixhosaCounter = 0;
 var greetingsCounter = 0;
-var namesGreeted = {
-    name: the_nameElem
-};
+var namesGreeted = {};
 
 // console.log(namesGreeted);
+
+count_textElem.innerHTML = localStorage.getItem('greetingsCounter');
 
 function greetmeBtnClicked(the_nameElem) {
     for(var i = 0; i < languageRaioElem.length; i++){
         var elem = languageRaioElem[i];
         if(elem.checked === true) {
             if( (elem.value === "english") && (document.querySelector('.the_name').value !== "") ) {
-            // englisCounter++;
-            greetingsCounter++;
+                // englisCounter++;
+                keepGreetingsCount();
             
-            var msg = ("Hello, " + document.querySelector('.the_name').value);
-    
-            greetMsgElem.innerHTML = msg
-            count_textElem.innerHTML = greetingsCounter;
-            document.querySelector('.the_name').value = '';
+                var msg = ("Hello, " + document.querySelector('.the_name').value);
+        
+                greetMsgElem.innerHTML = msg
+                document.querySelector('.the_name').value = '';
+
             }  else if(elem.value === "afrikaans" && (document.querySelector('.the_name').value !== "")) {
                 // afrikaansCounter++;
-                greetingsCounter++;
+                keepGreetingsCount();
+            
                 var msg = ("Hallo, " + document.querySelector('.the_name').value);
-                greetMsgElem.innerHTML = msg;
-                count_textElem.innerHTML = greetingsCounter;
+        
+                greetMsgElem.innerHTML = msg
                 document.querySelector('.the_name').value = '';
     
             } else if(elem.value === "isixhosa" && (document.querySelector('.the_name').value !== "")) {
                 // isixhosaCounter++;
-                greetingsCounter++;
+                keepGreetingsCount();
+            
                 var msg = ("Molo, " + document.querySelector('.the_name').value);
-                greetMsgElem.innerHTML = msg;
-                count_textElem.innerHTML = greetingsCounter;
+        
+                greetMsgElem.innerHTML = msg
                 document.querySelector('.the_name').value = '';
+
             } 
         }
     }
 }
 
-// function greetmeBtnClicked(the_nameElem) {
-//     for(var i = 0; i < languageRaioElem.length; i++){
-//         var elem = languageRaioElem[i];
-//         if(elem.checked === true) {
-//             if( (elem.value === "english") && (document.querySelector('.the_name').value !== "") ) {
-//             // englisCounter++;
-//             // greetingsCounter++;
-            
-//             // var msg = ("Hello, " + document.querySelector('.the_name').value);
-    
-//             // greetMsgElem.innerHTML = msg
-//             // count_textElem.innerHTML = greetingsCounter;
-//             // document.querySelector('.the_name').value = '';
+function keepGreetingsCount() {
+    greetingsCounter = localStorage.getItem('greetingsCounter');
+    greetingsCounter++;
+    localStorage.setItem("greetingsCounter", greetingsCounter);
+    count_textElem.innerHTML = greetingsCounter;
+  
+}
 
-//             if (namesGreeted[the_nameElem] === undefined){
-//                 alert("namesGreeted[the_nameElem]");
-//                 greetingsCounter++;
-//                 //add an entry for the user that was greeted in the Object Map
-//                 // namesGreeted[userName] = 0;
-//                 //update the DOM to display the counter
-//                 count_textElem.innerHTML = greetingsCounter;
-//             } else {
-//                 alert("name exists");
-//             }
-//         } 
-//         }
-//     }
-// }
+function saveNames() {
+    // alert("save names is working");
+    localStorage.setItem('names', JSON.stringify(namesGreeted));
+
+    // Read item:
+    // var names = JSON.parse(localStorage.getItem('names'));
+    // console.log(names);
+
+    var obj = JSON.parse( localStorage.getItem('names') );
+    obj[name] = 'Thandolwethu';
+    localStorage.setItem('names', JSON.stringify(obj));
+
+}
+saveNames();
 
 function resetCounterBtnClicked() {
+    localStorage.clear();
     count_textElem.innerHTML = 0;
     greetingsCounter = 0;
 }
