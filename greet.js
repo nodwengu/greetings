@@ -19,31 +19,22 @@ function greetmeBtnClicked(the_nameElem) {
     for(var i = 0; i < languageRaioElem.length; i++){
         var elem = languageRaioElem[i];
         if(elem.checked === true) {
-            if( (elem.value === "english") && (document.querySelector('.the_name').value !== "") ) {
-                // englisCounter++;
+            if( (elem.value === "english") && the_nameElem !== "" ) {
                 keepGreetingsCount();
-            
-                var msg = ("Hello, " + document.querySelector('.the_name').value);
         
-                greetMsgElem.innerHTML = msg
+                greetMsgElem.innerHTML = "Hello, " + document.querySelector('.the_name').value
                 document.querySelector('.the_name').value = '';
 
-            }  else if(elem.value === "afrikaans" && (document.querySelector('.the_name').value !== "")) {
-                // afrikaansCounter++;
+            }  else if(elem.value === "afrikaans" && the_nameElem !== "") {
                 keepGreetingsCount();
-            
-                var msg = ("Hallo, " + document.querySelector('.the_name').value);
         
-                greetMsgElem.innerHTML = msg
+                greetMsgElem.innerHTML = "Hallo, " + document.querySelector('.the_name').value
                 document.querySelector('.the_name').value = '';
     
-            } else if(elem.value === "isixhosa" && (document.querySelector('.the_name').value !== "")) {
-                // isixhosaCounter++;
+            } else if(elem.value === "isixhosa" && the_nameElem !== "") {
                 keepGreetingsCount();
-            
-                var msg = ("Molo, " + document.querySelector('.the_name').value);
         
-                greetMsgElem.innerHTML = msg
+                greetMsgElem.innerHTML = "Molo, " + document.querySelector('.the_name').value
                 document.querySelector('.the_name').value = '';
 
             } 
@@ -51,30 +42,97 @@ function greetmeBtnClicked(the_nameElem) {
     }
 }
 
-function keepGreetingsCount() {
-    greetingsCounter = localStorage.getItem('greetingsCounter');
-    greetingsCounter++;
+var namesGreeted = {};
+var namesArr = [];
+
+function keepGreetingsCount(the_nameElem) {
+    var nameObj = {
+        name: document.querySelector('.the_name').value.toLowerCase() 
+    }
+   
+
+    // if( localStorage.getItem('greetingNames') == null) {
+        
+    //     namesArr.push(nameObj);
+    //     localStorage.setItem('greetingNames', JSON.stringify(namesArr));
+    // } else {
+    //     namesArr = JSON.parse(localStorage.getItem('greetingNames'));
+    //     namesArr.push(nameObj);
+    //     localStorage.setItem('greetingNames', JSON.stringify(namesArr));
+    // }
+
+    localStorage.setItem('greetingNames', JSON.stringify(namesArr));
     localStorage.setItem("greetingsCounter", greetingsCounter);
-    count_textElem.innerHTML = greetingsCounter;
+    
+    if(localStorage.getItem('greetingNames')) {
+        var data = JSON.parse( localStorage.getItem('greetingNames') );
+
+        for(let i = 0; i < data.length; i++) {
+            var elem = data[i];
+            var name = elem.name;
+            
+            if (namesGreeted[name] === undefined){
+                //add an entry for the user that was greeted in the Object Map
+                namesGreeted[name] = 0;
+            } else {
+                namesGreeted[name]++;
+            }
+        }
+
+        var nameCount = 0; var modelName = "";
+        var theTest = document.querySelector('.the_name').value;
+        for(var key in namesGreeted) {
+            // alert(namesGreeted.hasOwnProperty("tedo"));
+            // alert(key);
+            if(namesGreeted.hasOwnProperty(theTest)) {
+                alert("Item already existss");
+                break;
+            } else {
+
+                if( localStorage.getItem('greetingNames') == null) {
+            
+                    namesArr.push(nameObj);
+                    alert("nameObj");
+
+                    greetingsCounter = localStorage.getItem('greetingsCounter');
+
+                    greetingsCounter++;
+                    localStorage.setItem("greetingsCounter", greetingsCounter);
+                    count_textElem.innerHTML = greetingsCounter;
+                   
+
+                } else {
+                    namesArr = JSON.parse(localStorage.getItem('greetingNames'));
+                    namesArr.push(nameObj);
+                    localStorage.setItem('greetingNames', JSON.stringify(namesArr));
+
+                    greetingsCounter = localStorage.getItem('greetingsCounter');
+
+                    greetingsCounter++;
+                   
+                    count_textElem.innerHTML = greetingsCounter;
+
+                }
+                localStorage.setItem('greetingNames', JSON.stringify(namesArr));
+
+                // greetingsCounter = localStorage.getItem('greetingsCounter');
+
+                // greetingsCounter++;
+                // localStorage.setItem("greetingsCounter", greetingsCounter);
+                // count_textElem.innerHTML = greetingsCounter;
+                // alert("alert after break");
+                break;
+            }
+        }
+        
+    }
+    
+    
   
 }
 
-function saveNames() {
-    // alert("save names is working");
-    localStorage.setItem('names', JSON.stringify(namesGreeted));
 
-    // Read item:
-    // var names = JSON.parse(localStorage.getItem('names'));
-    // console.log(names);
-
-    var obj = JSON.parse( localStorage.getItem('names') );
-    obj[name] = 'Thandolwethu';
-    localStorage.setItem('names', JSON.stringify(obj));
-
-}
-saveNames();
-
-function resetCounterBtnClicked() {
+function resetCounter() {
     localStorage.clear();
     count_textElem.innerHTML = 0;
     greetingsCounter = 0;
@@ -82,4 +140,4 @@ function resetCounterBtnClicked() {
 
 greetmeBtnElem.addEventListener('click', greetmeBtnClicked);
 
-resetCounterElem.addEventListener('click', resetCounterBtnClicked);
+resetCounterElem.addEventListener('click', resetCounter);
