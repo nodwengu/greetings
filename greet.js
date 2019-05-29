@@ -10,27 +10,29 @@ var greetingsCounter = 0;
 count_textElem.innerHTML = localStorage.getItem('greetingsCounter');
 
 function greetmeBtnClicked(the_nameElem) {
+   var nameValue = document.querySelector('.the_name').value
    for(var i = 0; i < languageRaioElem.length; i++){
       var elem = languageRaioElem[i];
       if(elem.checked === true) {
-         if( (elem.value === "english") && document.querySelector('.the_name').value !== "" ) {
+         if( (elem.value === "english") && nameValue !== "" ) {
             keepGreetingsCount();
    
-            greetMsgElem.innerHTML = "Hello, " + document.querySelector('.the_name').value
-            document.querySelector('.the_name').value = '';
-         }  else if(elem.value === "afrikaans" && document.querySelector('.the_name').value !== "") {
+            greetMsgElem.innerHTML = "Hello, " + nameValue;
+            document.querySelector('.the_name').value;
+         }  else if(elem.value === "afrikaans" && nameValue !== "") {
             keepGreetingsCount();
    
-            greetMsgElem.innerHTML = "Hallo, " + document.querySelector('.the_name').value
-            document.querySelector('.the_name').value = '';  
-         } else if(elem.value === "isixhosa" && document.querySelector('.the_name').value !== "") {
+            greetMsgElem.innerHTML = "Hallo, " + nameValue.
+            document.querySelector('.the_name').value;  
+         } else if(elem.value === "isixhosa" && nameValue !== "") {
             keepGreetingsCount();
    
-            greetMsgElem.innerHTML = "Molo, " + document.querySelector('.the_name').value
+            greetMsgElem.innerHTML = "Molo, " + nameValue
             document.querySelector('.the_name').value = '';
          } 
       }
    }
+   
 }
 
 var namesGreeted = {};
@@ -100,6 +102,7 @@ function resetCounter() {
    count_textElem.innerHTML = 0;
    greetingsCounter = 0;
 }
+
 
 greetmeBtnElem.addEventListener('click', greetmeBtnClicked);
 
