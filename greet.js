@@ -18,19 +18,16 @@ function greetmeBtnClicked(the_nameElem) {
    
             greetMsgElem.innerHTML = "Hello, " + document.querySelector('.the_name').value
             document.querySelector('.the_name').value = '';
-
          }  else if(elem.value === "afrikaans" && document.querySelector('.the_name').value !== "") {
             keepGreetingsCount();
    
             greetMsgElem.innerHTML = "Hallo, " + document.querySelector('.the_name').value
-            document.querySelector('.the_name').value = '';
-   
+            document.querySelector('.the_name').value = '';  
          } else if(elem.value === "isixhosa" && document.querySelector('.the_name').value !== "") {
             keepGreetingsCount();
    
             greetMsgElem.innerHTML = "Molo, " + document.querySelector('.the_name').value
             document.querySelector('.the_name').value = '';
-
          } 
       }
    }
@@ -43,17 +40,6 @@ function keepGreetingsCount(the_nameElem) {
    var nameObj = {
       name: document.querySelector('.the_name').value.toLowerCase() 
    }
-
-    // if( localStorage.getItem('greetingNames') == null) {
-        
-    //     namesArr.push(nameObj);
-    //     localStorage.setItem('greetingNames', JSON.stringify(namesArr));
-    // } else {
-    //     namesArr = JSON.parse(localStorage.getItem('greetingNames'));
-    //     namesArr.push(nameObj);
-    //     localStorage.setItem('greetingNames', JSON.stringify(namesArr));
-    // }
-    
 
    if(localStorage.getItem('greetingNames')) {
       var data = JSON.parse( localStorage.getItem('greetingNames') );
@@ -76,7 +62,6 @@ function keepGreetingsCount(the_nameElem) {
          if(namesGreeted.hasOwnProperty(name)) {
             alert("User name already exists");
             break;
-
          } else {
             if( localStorage.getItem('greetingNames') == null) {
                namesArr.push(nameObj);
@@ -84,8 +69,7 @@ function keepGreetingsCount(the_nameElem) {
 
                greetingsCounter++;
                localStorage.setItem("greetingsCounter", greetingsCounter);
-               count_textElem.innerHTML = greetingsCounter;
-               
+               count_textElem.innerHTML = greetingsCounter;               
             } else {
                namesArr = JSON.parse(localStorage.getItem('greetingNames'));
                namesArr.push(nameObj);
@@ -95,12 +79,10 @@ function keepGreetingsCount(the_nameElem) {
                greetingsCounter++;
                localStorage.setItem("greetingsCounter", greetingsCounter);
                count_textElem.innerHTML = greetingsCounter;
-
             }           
             break;
          }
-      }
-        
+      }    
    } else {
       // alert("First appearance on the list");
       namesArr.push(nameObj);
@@ -109,6 +91,7 @@ function keepGreetingsCount(the_nameElem) {
 
       greetingsCounter++;
       localStorage.setItem("greetingsCounter", greetingsCounter);
+      count_textElem.innerHTML = greetingsCounter;
    }
 }
 
