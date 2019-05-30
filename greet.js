@@ -104,6 +104,8 @@ function resetCounter() {
 }
 
 
+
+
 greetmeBtnElem.addEventListener('click', greetmeBtnClicked);
 
 resetCounterElem.addEventListener('click', resetCounter);
