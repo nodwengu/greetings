@@ -86,7 +86,7 @@ function keepGreetingsCount(the_nameElem) {
          }
       }    
    } else {
-      // alert("First appearance on the list");
+      alert("First appearance on the list");
       namesArr.push(nameObj);
 
       localStorage.setItem( 'greetingNames', JSON.stringify(namesArr) );
