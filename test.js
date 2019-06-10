@@ -4,6 +4,7 @@ var greetMsgElem = document.querySelector('.greetMsg');
 var count_textElem = document.querySelector('.count_text');
 var languageRaioElem = document.querySelectorAll('.languageRadio');
 var resetCounterElem = document.querySelector('.resetCounter');
+var errorElem = document.querySelector('.error');
 
 
 const createGreetings = function() {
@@ -11,9 +12,10 @@ const createGreetings = function() {
    var namesGreeted = {};
    var namesArr = [];
    var greetingsCounter = 0;
-   
-  
 
+   var Counter = localStorage.getItem('greetingsCounter');
+   count_textElem.innerHTML = Counter;
+   
    function getCounter() {
       
       // Check if there is greetingsCounter on the local storage
@@ -28,7 +30,11 @@ const createGreetings = function() {
 
       //return the counter
       // greet();
-
+      if(the_nameElem.value == "") {
+         errorElem.classList.add('show-error')
+         return
+      } 
+     
       if(localStorage.getItem('greetingsCounter')) { // if there is greetingsCounter item on local storage
          greetingsCounter = localStorage.getItem('greetingsCounter');
          greetingsCounter++;
@@ -42,6 +48,7 @@ const createGreetings = function() {
          localStorage.setItem('greetingsCounter', greetingsCounter);
          
       }
+      
 
       return greetingsCounter;
    }
@@ -49,8 +56,9 @@ const createGreetings = function() {
    function reset() {
       alert("reset function");
       localStorage.clear();
-      count_textElem.innerHTML = 0;
+      // count_textElem.innerHTML = 0;
       greetingsCounter = 0;
+      location.reload();
    }
 
    function greet() {
@@ -58,16 +66,17 @@ const createGreetings = function() {
    }
 
    function displayError() {
-      alert("displayError function needs attention");
+      if(the_nameElem.value == "") {
+         errorElem.classList.add('show-error')
+         return
+      } 
    }
 
    function greetByName() {
       getCounter();
 
-      var greetMsg = "";
-
       // alert(the_nameElem.value)
-
+      var nameValue = document.querySelector('.the_name').value
       for(var i = 0; i < languageRaioElem.length; i++){
 
          var elem = languageRaioElem[i];
@@ -75,19 +84,19 @@ const createGreetings = function() {
             
             var elem = languageRaioElem[i];
             // alert(elem.value)
-            if(elem.value === "english") {
+            if( (elem.value === "english") && nameValue !== "" ) {
                
                getName();
                greetMsgElem.innerHTML = "Hello, " + the_nameElem.value;
                document.querySelector('.the_name').value  = '';
 
-            }  else if(elem.value === "afrikaans") {
+            }  else if(elem.value === "afrikaans" && nameValue !== "") {
 
                getName();
                greetMsgElem.innerHTML = "Hallo, " + the_nameElem.value;
                document.querySelector('.the_name').value  = '';  
 
-            } else if(elem.value === "isixhosa") {
+            } else if(elem.value === "isixhosa" && nameValue !== "") {
 
                getName();
                greetMsgElem.innerHTML = "Molo, " + the_nameElem.value
@@ -95,6 +104,7 @@ const createGreetings = function() {
             } 
          }
       }
+   
    }
 
    function getName() {
@@ -123,7 +133,7 @@ const createGreetings = function() {
          for(var key in namesGreeted) {
             if(namesGreeted.hasOwnProperty(name)) {
                alert("User name already exists");
-               displayError()
+               errorElem.classList.add('show-error')
                break;
             } else {
                if( localStorage.getItem('greetingNames') == null) {
@@ -152,7 +162,9 @@ const createGreetings = function() {
    }
 
    function updateStorage() {
-      alert("about to update storage")
+      if(the_nameElem.value == "") {
+         alert("about to update storage")
+      }
    }
 
    return {
