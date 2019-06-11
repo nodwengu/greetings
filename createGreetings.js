@@ -3,7 +3,7 @@ const createGreetings = function() {
     var namesArr = [];
     var greetingsCounter = 0;
 
-    function getCounter() {
+    function setCounter() {
         if(localStorage.getItem('greetingsCounter')) { // if there is greetingsCounter item on local storage
             greetingsCounter = localStorage.getItem('greetingsCounter');
             greetingsCounter++;
@@ -13,15 +13,17 @@ const createGreetings = function() {
             //Create greetings counter on the local storage
             localStorage.setItem('greetingsCounter', greetingsCounter);   
         }
-   
-        return greetingsCounter;
+    }
+
+    function getCounter() {
+        return greetingsCounter; 
     }
 
     function saveName(theName) {
-        alert("Name: " + theName);
-      var nameObj = {
-         name: theName.toLowerCase() 
-      }
+        //alert("Name: " + theName);
+        var nameObj = {
+            name: theName.toLowerCase() 
+        }
    
     if(localStorage.getItem('greetingNames')) {
         var data = JSON.parse( localStorage.getItem('greetingNames') );
@@ -48,50 +50,41 @@ const createGreetings = function() {
             } else {
                if( localStorage.getItem('greetingNames') == null) {
                   namesArr.push(nameObj);
+                  setCounter()
                   localStorage.setItem('greetingNames', JSON.stringify(namesArr));
+                 
            
                } else {
                   namesArr = JSON.parse(localStorage.getItem('greetingNames'));
                   namesArr.push(nameObj);
+                  setCounter()
                   localStorage.setItem('greetingNames', JSON.stringify(namesArr));
+                 
                }           
                break;
             }
          }    
       } else {
-         alert("First appearance on the list");
+         //alert("First appearance on the list");
          namesArr.push(nameObj);
-   
+         setCounter()
          localStorage.setItem( 'greetingNames', JSON.stringify(namesArr) );
-
       }
     }
 
-    function getName() {}
-
-    function englishGreeting(radioVal, name) {
-        if( (radioVal === "english") && name !== "" ) {
-            return "Hello, " + name;
-            // document.querySelector('.the_name').value  = '';
-        }
+    function englishGreeting(name) {
+        return "Hello, " + name;
     }
 
-    function afrikaansGreeting(radioVal, name) {
-        if( (radioVal === "afrikaans") && name !== "" ) {
-            return "Hallo, " + name;
-            // document.querySelector('.the_name').value  = '';
-        }
+    function afrikaansGreeting(name) {
+        return "Hallo, " + name;
     }
 
-    function xhosaGreeting(radioVal, name) {
-        if( (radioVal === "isixhosa") && name !== "" ) {
-            return "Molo, " + name;
-            // document.querySelector('.the_name').value  = '';
-        }
+    function xhosaGreeting(name) {
+        return "Molo, " + name;
     }
 
     function reset() {
-        alert("reset function");
         localStorage.clear();
         greetingsCounter = 0;
         location.reload();
@@ -99,6 +92,7 @@ const createGreetings = function() {
 
     return {
         getCounter,
+        setCounter,
         saveName,
         reset,
         englishGreeting,
@@ -109,4 +103,4 @@ const createGreetings = function() {
 
 var greetInstance = createGreetings();
 
-//alert(greetInstance.xhosaGreeting('isixhosa', 'mzi'));
+// greetInstance.saveName('isixhosa');
