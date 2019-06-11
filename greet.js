@@ -19,6 +19,13 @@ function greetmeBtnClicked() {
       nameValue = nameValue.charAt(0).toUpperCase() + nameValue.slice(1);
    }
 
+   if(greetingOne.displayError(nameValue)) {
+      document.querySelector('.error').classList.add('showError');
+      document.querySelector('.error').innerHTML = "Error in your input field"
+   } else {
+      document.querySelector('.error').classList.remove('showError');
+   }
+
    for(var i = 0; i < languageRaioElem.length; i++){
       var elem = languageRaioElem[i];
       if(elem.checked === true) {

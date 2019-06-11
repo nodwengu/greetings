@@ -61,12 +61,12 @@ input[type=radio] {
 }
 
 .error {
-    color: #fff; 
-    background-color: red; 
+    color: #f00; 
     display: none;
+    text-align: center;
 }
 
-.show-error {
+.showError {
     display: block;
 }
 

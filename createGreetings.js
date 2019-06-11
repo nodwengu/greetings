@@ -52,7 +52,6 @@ const createGreetings = function() {
                   namesArr.push(nameObj);
                   setCounter()
                   localStorage.setItem('greetingNames', JSON.stringify(namesArr));
-                 
            
                } else {
                   namesArr = JSON.parse(localStorage.getItem('greetingNames'));
@@ -90,6 +89,10 @@ const createGreetings = function() {
         location.reload();
      }
 
+     function displayError(name) {
+        return name == ""; 
+     }
+
     return {
         getCounter,
         setCounter,
@@ -97,7 +100,8 @@ const createGreetings = function() {
         reset,
         englishGreeting,
         afrikaansGreeting,
-        xhosaGreeting
+        xhosaGreeting,
+        displayError
     }
 }
 
