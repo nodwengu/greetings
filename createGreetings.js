@@ -1,34 +1,34 @@
 const createGreetings = function() {
-    var namesGreeted = {};
-    var namesArr = [];
-    var greetingsCounter = 0;
+   var greetingsCounter = 0;
+   var namesGreeted = {};
+   var namesArr = [];
 
-    function setCounter() {
-        if(localStorage.getItem('greetingsCounter')) { // if there is greetingsCounter item on local storage
-            greetingsCounter = localStorage.getItem('greetingsCounter');
-            greetingsCounter++;
-            localStorage.setItem('greetingsCounter', greetingsCounter);
-        } else { // if there is NO greetingsCounter item on local storage
-            greetingsCounter++;
-            //Create greetings counter on the local storage
-            localStorage.setItem('greetingsCounter', greetingsCounter);   
-        }
-    }
+   function setCounter() {
+      if(localStorage.getItem('greetingsCounter')) { // if there is greetingsCounter item on local storage
+         greetingsCounter = localStorage.getItem('greetingsCounter');
+         greetingsCounter++;
+         localStorage.setItem('greetingsCounter', greetingsCounter);
+      } else { // if there is NO greetingsCounter item on local storage
+         greetingsCounter++;
+         //Create greetings counter on the local storage
+         localStorage.setItem('greetingsCounter', greetingsCounter);   
+      }
+   }
 
-    function getCounter() {
-        return greetingsCounter; 
-    }
+   function getCounter() {
+      return greetingsCounter; 
+   }
 
-    function saveName(theName) {
-        //alert("Name: " + theName);
-        var nameObj = {
-            name: theName.toLowerCase() 
-        }
+   function saveName(theName) {
+      //alert("Name: " + theName);
+      var nameObj = {
+         name: theName.toLowerCase() 
+      }
    
-    if(localStorage.getItem('greetingNames')) {
-        var data = JSON.parse( localStorage.getItem('greetingNames') );
+      if(localStorage.getItem('greetingNames')) {
+         var data = JSON.parse( localStorage.getItem('greetingNames') );
 
-        for(let i = 0; i < data.length; i++) {
+         for(let i = 0; i < data.length; i++) {
             var elem = data[i];
             var name = elem.name;
             
@@ -38,15 +38,15 @@ const createGreetings = function() {
             } else {
                 namesGreeted[name]++;
             }
-        }
+         }
    
-        var name = theName.toLowerCase();
+         var name = theName.toLowerCase();
    
          for(var key in namesGreeted) {
             if(namesGreeted.hasOwnProperty(name)) {
-               alert("User name already exists");
-               //errorElem.classList.add('show-error')
-               break;
+               //alert(name + " already exists");
+               checkName(name);
+               return false;
             } else {
                if( localStorage.getItem('greetingNames') == null) {
                   namesArr.push(nameObj);
@@ -69,40 +69,47 @@ const createGreetings = function() {
          setCounter()
          localStorage.setItem( 'greetingNames', JSON.stringify(namesArr) );
       }
-    }
+   }
 
-    function englishGreeting(name) {
-        return "Hello, " + name;
-    }
+   function englishGreeting(name) {
+      return "Hello, " + name;
+   }
 
-    function afrikaansGreeting(name) {
-        return "Hallo, " + name;
-    }
+   function afrikaansGreeting(name) {
+      return "Hallo, " + name;
+   }
 
-    function xhosaGreeting(name) {
-        return "Molo, " + name;
-    }
+   function xhosaGreeting(name) {
+      return "Molo, " + name;
+   }
 
-    function reset() {
-        localStorage.clear();
-        greetingsCounter = 0;
-        location.reload();
-     }
+   function reset() {
+      localStorage.clear();
+      greetingsCounter = 0;
+      location.reload();
+   }
 
-     function displayError(name) {
-        return name == ""; 
-     }
+   function displayError(name) {
+      return name == ""; 
+   }
 
-    return {
-        getCounter,
-        setCounter,
-        saveName,
-        reset,
-        englishGreeting,
-        afrikaansGreeting,
-        xhosaGreeting,
-        displayError
-    }
+   function checkName(name) {
+      if(namesGreeted.hasOwnProperty(name)) {
+        alert (englishGreeting(name) + " welcome back.")
+      } 
+   }
+
+   return {
+      getCounter,
+      setCounter,
+      saveName,
+      reset,
+      englishGreeting,
+      afrikaansGreeting,
+      xhosaGreeting,
+      displayError,
+      checkName
+   }
 }
 
 var greetInstance = createGreetings();

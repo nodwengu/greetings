@@ -19,12 +19,15 @@ function greetmeBtnClicked() {
       nameValue = nameValue.charAt(0).toUpperCase() + nameValue.slice(1);
    }
 
-   if(greetingOne.displayError(nameValue)) {
+   // alert( greetingOne.checkName(nameValue) );
+
+   if( greetingOne.displayError(nameValue) ) {
       document.querySelector('.error').classList.add('showError');
       document.querySelector('.error').innerHTML = "Error in your input field"
    } else {
       document.querySelector('.error').classList.remove('showError');
    }
+
 
    for(var i = 0; i < languageRaioElem.length; i++){
       var elem = languageRaioElem[i];
@@ -48,7 +51,7 @@ function greetmeBtnClicked() {
          }
       }
    }
-   
+   count_textElem.innerHTML = localStorage.getItem('greetingsCounter');
 }
 
 function resetCounter() {

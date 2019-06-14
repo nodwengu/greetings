@@ -16,15 +16,8 @@ describe("Greetings Function", function() {
         var greetingOne = createGreetings();
 
         assert.equal(greetingOne.xhosaGreeting('James'), 'Molo, James');
+
     });
-
-    // it('should return "Molo, James" when isiXhosa button is selected', function(){
-    //     var greetingOne = createGreetings();
-
-    //     assert.equal(greetingOne.saveName('thando'), false);
-    // });
-
-
   
 
 
