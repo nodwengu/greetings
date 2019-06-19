@@ -95,7 +95,7 @@ const createGreetings = function() {
 
    function checkName(name) {
       if(namesGreeted.hasOwnProperty(name)) {
-        alert (englishGreeting(name) + " welcome back.")
+        return englishGreeting(name) + " welcome back."
       } 
    }
 

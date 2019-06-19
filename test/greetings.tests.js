@@ -18,10 +18,5 @@ describe("Greetings Function", function() {
         assert.equal(greetingOne.xhosaGreeting('James'), 'Molo, James');
 
     });
-  
-
-
-   
-   
     
 });
