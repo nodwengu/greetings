@@ -59,6 +59,54 @@ function resetCounter() {
    greetingOne.reset();
 }
 
+function addName(name) {
+  
+   if(localStorage.getItem('greetingNames')) {
+      var data = JSON.parse( localStorage.getItem('greetingNames') );
+
+      for(let i = 0; i < data.length; i++) {
+         var elem = data[i];
+         var name = elem.name;
+         
+         if (namesGreeted[name] === undefined){
+            //add an entry for the user that was greeted in the Object Map
+            namesGreeted[name] = 0;
+         } else {
+            namesGreeted[name]++;
+         }
+      }
+
+      var name = theName.toLowerCase();
+
+      for(var key in namesGreeted) {
+         if(namesGreeted.hasOwnProperty(name)) {
+            //alert(name + " already exists");
+            return false;
+         } else {
+            if( localStorage.getItem('greetingNames') == null) {
+               namesArr.push(nameObj);
+               greetingOne.setCounter()
+               localStorage.setItem('greetingNames', JSON.stringify(namesArr));
+      
+            } else {
+               namesArr = JSON.parse(localStorage.getItem('greetingNames'));
+               namesArr.push(nameObj);
+               greetingOne.setCounter()
+               localStorage.setItem('greetingNames', JSON.stringify(namesArr));
+            
+            }           
+            break;
+         }
+      }    
+   } else {
+      //alert("First appearance on the list");
+      namesArr.push(nameObj);
+      greetingOne.setCounter()
+      localStorage.setItem( 'greetingNames', JSON.stringify(namesArr) );
+   }
+
+}
+
 greetmeBtnElem.addEventListener('click', greetmeBtnClicked);
 
 resetCounterElem.addEventListener('click', resetCounter);

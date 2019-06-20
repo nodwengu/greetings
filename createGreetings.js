@@ -19,11 +19,59 @@ const createGreetings = function() {
       return greetingsCounter; 
    }
 
+   // function saveName(theName) {
+   //    //alert("Name: " + theName);
+   //    var nameObj = {
+   //       name: theName.toLowerCase() 
+   //    }
+   
+   //    if(localStorage.getItem('greetingNames')) {
+   //       var data = JSON.parse( localStorage.getItem('greetingNames') );
+
+   //       for(let i = 0; i < data.length; i++) {
+   //          var elem = data[i];
+   //          var name = elem.name;
+            
+   //          if (namesGreeted[name] === undefined){
+   //              //add an entry for the user that was greeted in the Object Map
+   //              namesGreeted[name] = 0;
+   //          } else {
+   //              namesGreeted[name]++;
+   //          }
+   //       }
+   
+   //       var name = theName.toLowerCase();
+   
+   //       for(var key in namesGreeted) {
+   //          if(namesGreeted.hasOwnProperty(name)) {
+   //             //alert(name + " already exists");
+   //             return false;
+   //          } else {
+   //             if( localStorage.getItem('greetingNames') == null) {
+   //                namesArr.push(nameObj);
+   //                setCounter()
+   //                localStorage.setItem('greetingNames', JSON.stringify(namesArr));
+           
+   //             } else {
+   //                namesArr = JSON.parse(localStorage.getItem('greetingNames'));
+   //                namesArr.push(nameObj);
+   //                setCounter()
+   //                localStorage.setItem('greetingNames', JSON.stringify(namesArr));
+                 
+   //             }           
+   //             break;
+   //          }
+   //       }    
+   //    } else {
+   //       //alert("First appearance on the list");
+   //       namesArr.push(nameObj);
+   //       setCounter()
+   //       localStorage.setItem( 'greetingNames', JSON.stringify(namesArr) );
+   //    }
+   // }
+
    function saveName(theName) {
-      //alert("Name: " + theName);
-      var nameObj = {
-         name: theName.toLowerCase() 
-      }
+      var nameObj = { name: theName.toLowerCase() }
    
       if(localStorage.getItem('greetingNames')) {
          var data = JSON.parse( localStorage.getItem('greetingNames') );
@@ -45,18 +93,15 @@ const createGreetings = function() {
          for(var key in namesGreeted) {
             if(namesGreeted.hasOwnProperty(name)) {
                //alert(name + " already exists");
-               checkName(name);
                return false;
             } else {
                if( localStorage.getItem('greetingNames') == null) {
                   namesArr.push(nameObj);
-                  setCounter()
                   localStorage.setItem('greetingNames', JSON.stringify(namesArr));
            
                } else {
                   namesArr = JSON.parse(localStorage.getItem('greetingNames'));
                   namesArr.push(nameObj);
-                  setCounter()
                   localStorage.setItem('greetingNames', JSON.stringify(namesArr));
                  
                }           
@@ -66,8 +111,6 @@ const createGreetings = function() {
       } else {
          //alert("First appearance on the list");
          namesArr.push(nameObj);
-         setCounter()
-         localStorage.setItem( 'greetingNames', JSON.stringify(namesArr) );
       }
    }
 
@@ -95,22 +138,17 @@ const createGreetings = function() {
       //alert(!isNaN(name));
    }
 
-   function checkName(name) {
-      if(namesGreeted.hasOwnProperty(name)) {
-        return englishGreeting(name) + " welcome back."
-      } 
-   }
 
    return {
       getCounter,
-      setCounter,
+      //setCounter,
       saveName,
       reset,
       englishGreeting,
       afrikaansGreeting,
       xhosaGreeting,
-      displayError,
-      checkName
+      displayError
+     
    }
 }
 
