@@ -24,6 +24,7 @@ function greetmeBtnClicked() {
    if( greetingOne.displayError(nameValue) ) {
       document.querySelector('.error').classList.add('showError');
       document.querySelector('.error').innerHTML = "Error in your input field"
+      return false;
    } else {
       document.querySelector('.error').classList.remove('showError');
    }

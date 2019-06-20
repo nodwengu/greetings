@@ -15,7 +15,7 @@ const createGreetings = function() {
       }
    }
 
-   function getCounter() {
+   function getCounter() {   
       return greetingsCounter; 
    }
 
@@ -90,7 +90,9 @@ const createGreetings = function() {
    }
 
    function displayError(name) {
-      return name == ""; 
+      return name == "" || !isNaN(name); 
+      //alert (name == "" || !isNaN(name));
+      //alert(!isNaN(name));
    }
 
    function checkName(name) {
