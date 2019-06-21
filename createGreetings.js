@@ -70,49 +70,80 @@ const createGreetings = function() {
    //    }
    // }
 
+   // function saveName(theName) {
+   //    var nameObj = { name: theName.toLowerCase() }
+   
+   //    if(localStorage.getItem('greetingNames')) {
+   //       setName();
+   //       checkName();
+      
+   //    } else {
+   //       alert("First appearance on the list");
+   //       namesArr.push(nameObj);
+   //       setCounter()
+   //       localStorage.setItem( 'greetingNames', JSON.stringify(namesArr) );
+   //    }
+     
+      
+   // }
+
    function saveName(theName) {
       var nameObj = { name: theName.toLowerCase() }
    
-      if(localStorage.getItem('greetingNames')) {
-         var data = JSON.parse( localStorage.getItem('greetingNames') );
-
-         for(let i = 0; i < data.length; i++) {
-            var elem = data[i];
-            var name = elem.name;
-            
-            if (namesGreeted[name] === undefined){
-                //add an entry for the user that was greeted in the Object Map
-                namesGreeted[name] = 0;
-            } else {
-                namesGreeted[name]++;
-            }
-         }
-   
-         var name = theName.toLowerCase();
-   
-         for(var key in namesGreeted) {
-            if(namesGreeted.hasOwnProperty(name)) {
-               //alert(name + " already exists");
-               return false;
-            } else {
-               if( localStorage.getItem('greetingNames') == null) {
-                  namesArr.push(nameObj);
-                  localStorage.setItem('greetingNames', JSON.stringify(namesArr));
-           
-               } else {
-                  namesArr = JSON.parse(localStorage.getItem('greetingNames'));
-                  namesArr.push(nameObj);
-                  localStorage.setItem('greetingNames', JSON.stringify(namesArr));
-                 
-               }           
-               break;
-            }
-         }    
-      } else {
-         //alert("First appearance on the list");
+     
+         setName(theName);
+         checkName(theName);
+      
+         alert("First appearance on the list");
          namesArr.push(nameObj);
+         setCounter()
+       
+   }
+
+   function setName(data) {
+      //var data = JSON.parse( localStorage.getItem('greetingNames') );
+
+      for(let i = 0; i < data.length; i++) {
+         var elem = data[i];
+         var name = elem.name;
+         
+         if (namesGreeted[name] === undefined){
+             //add an entry for the user that was greeted in the Object Map
+             namesGreeted[name] = 0;
+         } else {
+             namesGreeted[name]++;
+         }
       }
    }
+
+   function checkName(theName) {
+      var nameObj = { name: theName.toLowerCase() }
+      var name = theName.toLowerCase();
+   
+      for(var key in namesGreeted) {
+         if(namesGreeted.hasOwnProperty(name)) {
+            alert(name + " already exists");
+            return false;
+         }
+
+         // if(namesGreeted.hasOwnProperty(name)) {
+         //    alert(name + " already exists");
+         //    return false;
+         // } else {
+         //    if( localStorage.getItem('greetingNames') == null) {
+         //       namesArr.push(nameObj);
+         //       localStorage.setItem('greetingNames', JSON.stringify(namesArr));
+         
+         //    } else {
+         //       namesArr = JSON.parse(localStorage.getItem('greetingNames'));
+         //       namesArr.push(nameObj);
+         //       localStorage.setItem('greetingNames', JSON.stringify(namesArr));
+               
+         //    }           
+         //    break;
+         // }      
+      }
+   }    
 
    function englishGreeting(name) {
       return "Hello, " + name;
@@ -147,7 +178,9 @@ const createGreetings = function() {
       englishGreeting,
       afrikaansGreeting,
       xhosaGreeting,
-      displayError
+      displayError,
+      setName,
+      checkName
      
    }
 }

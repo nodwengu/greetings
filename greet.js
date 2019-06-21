@@ -29,11 +29,29 @@ function greetmeBtnClicked() {
       document.querySelector('.error').classList.remove('showError');
    }
 
+   var data = JSON.parse( localStorage.getItem('greetingNames') );
 
    for(var i = 0; i < languageRaioElem.length; i++){
       var elem = languageRaioElem[i];
       if(elem.checked === true) {
          if( (elem.value === "english") && nameValue !== "" ) {
+
+            if(localStorage.getItem('greetingNames')) {
+               greetingOne.saveName(nameValue);
+               greetingOne.setName(data);
+               greetingOne.checkName(nameValue);
+               localStorage.setItem( 'greetingNames', JSON.stringify(namesArr) );
+            
+            } else {
+               // alert("First appearance on the list");
+               // namesArr.push(nameObj);
+               // greetingOne.setCounter()
+               // localStorage.setItem( 'greetingNames', JSON.stringify(namesArr) );
+
+               greetingOne.saveName(nameValue);
+               localStorage.setItem( 'greetingNames', JSON.stringify(namesArr) );
+            }      
+
             greetingOne.saveName(nameValue);
 
             greetMsgElem.innerHTML = greetingOne.englishGreeting(nameValue);
@@ -59,53 +77,53 @@ function resetCounter() {
    greetingOne.reset();
 }
 
-function addName(name) {
+// function addName(name) {
   
-   if(localStorage.getItem('greetingNames')) {
-      var data = JSON.parse( localStorage.getItem('greetingNames') );
+//    if(localStorage.getItem('greetingNames')) {
+//       var data = JSON.parse( localStorage.getItem('greetingNames') );
 
-      for(let i = 0; i < data.length; i++) {
-         var elem = data[i];
-         var name = elem.name;
+//       for(let i = 0; i < data.length; i++) {
+//          var elem = data[i];
+//          var name = elem.name;
          
-         if (namesGreeted[name] === undefined){
-            //add an entry for the user that was greeted in the Object Map
-            namesGreeted[name] = 0;
-         } else {
-            namesGreeted[name]++;
-         }
-      }
+//          if (namesGreeted[name] === undefined){
+//             //add an entry for the user that was greeted in the Object Map
+//             namesGreeted[name] = 0;
+//          } else {
+//             namesGreeted[name]++;
+//          }
+//       }
 
-      var name = theName.toLowerCase();
+//       var name = theName.toLowerCase();
 
-      for(var key in namesGreeted) {
-         if(namesGreeted.hasOwnProperty(name)) {
-            //alert(name + " already exists");
-            return false;
-         } else {
-            if( localStorage.getItem('greetingNames') == null) {
-               namesArr.push(nameObj);
-               greetingOne.setCounter()
-               localStorage.setItem('greetingNames', JSON.stringify(namesArr));
+//       for(var key in namesGreeted) {
+//          if(namesGreeted.hasOwnProperty(name)) {
+//             //alert(name + " already exists");
+//             return false;
+//          } else {
+//             if( localStorage.getItem('greetingNames') == null) {
+//                namesArr.push(nameObj);
+//                greetingOne.setCounter()
+//                localStorage.setItem('greetingNames', JSON.stringify(namesArr));
       
-            } else {
-               namesArr = JSON.parse(localStorage.getItem('greetingNames'));
-               namesArr.push(nameObj);
-               greetingOne.setCounter()
-               localStorage.setItem('greetingNames', JSON.stringify(namesArr));
+//             } else {
+//                namesArr = JSON.parse(localStorage.getItem('greetingNames'));
+//                namesArr.push(nameObj);
+//                greetingOne.setCounter()
+//                localStorage.setItem('greetingNames', JSON.stringify(namesArr));
             
-            }           
-            break;
-         }
-      }    
-   } else {
-      //alert("First appearance on the list");
-      namesArr.push(nameObj);
-      greetingOne.setCounter()
-      localStorage.setItem( 'greetingNames', JSON.stringify(namesArr) );
-   }
+//             }           
+//             break;
+//          }
+//       }    
+//    } else {
+//       //alert("First appearance on the list");
+//       namesArr.push(nameObj);
+//       greetingOne.setCounter()
+//       localStorage.setItem( 'greetingNames', JSON.stringify(namesArr) );
+//    }
 
-}
+// }
 
 greetmeBtnElem.addEventListener('click', greetmeBtnClicked);
 
