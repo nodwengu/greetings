@@ -21,9 +21,9 @@ function greetmeBtnClicked() {
    }
 
 
-   if( greetingsInstance.displayError(nameValue) || languageRaioElem[0].checked == false || languageRaioElem[1].checked == false) {
+   if( greetingsInstance.displayError(nameValue)) {
       document.querySelector('.error').classList.add('showError');
-      document.querySelector('.error').innerHTML = "Error in your input field"
+      document.querySelector('.error').innerHTML = "Error in your input fields"
       return false;
    } else {
       document.querySelector('.error').classList.remove('showError');
