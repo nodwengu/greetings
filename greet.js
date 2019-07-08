@@ -9,7 +9,7 @@ var greetingsInstance = createGreetings();
 var data = JSON.parse( localStorage.getItem('greetingNames') );
 
 count_textElem.innerHTML = localStorage.getItem('greetingsCounter');
-
+console.log(languageRaioElem[0].checked)
 function greetmeBtnClicked() {
    var nameValue = document.querySelector('.the_name').value;
    
@@ -20,7 +20,8 @@ function greetmeBtnClicked() {
       nameValue = nameValue.charAt(0).toUpperCase() + nameValue.slice(1);
    }
 
-   if( greetingsInstance.displayError(nameValue) ) {
+
+   if( greetingsInstance.displayError(nameValue) || languageRaioElem[0].checked == false || languageRaioElem[1].checked == false) {
       document.querySelector('.error').classList.add('showError');
       document.querySelector('.error').innerHTML = "Error in your input field"
       return false;
