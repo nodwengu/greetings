@@ -1,17 +1,18 @@
 var greetmeBtnElem = document.querySelector('.greetme-btn');
-var the_nameElem = document.querySelector('.the_name').value;
 var greetMsgElem = document.querySelector('.greetMsg');
 var count_textElem = document.querySelector('.count_text');
 var languageRaioElem = document.querySelectorAll('.languageRadio');
 var resetCounterElem = document.querySelector('.resetCounter');
 
-var greetingOne = createGreetings();
+var greetingsInstance = createGreetings();
+
+var data = JSON.parse( localStorage.getItem('greetingNames') );
 
 count_textElem.innerHTML = localStorage.getItem('greetingsCounter');
 
 function greetmeBtnClicked() {
-   var nameValue = document.querySelector('.the_name').value
-
+   var nameValue = document.querySelector('.the_name').value;
+   
    if (nameValue == nameValue.toLowerCase()){
       nameValue = nameValue.charAt(0).toUpperCase() + nameValue.slice(1);
    } else {
@@ -19,111 +20,85 @@ function greetmeBtnClicked() {
       nameValue = nameValue.charAt(0).toUpperCase() + nameValue.slice(1);
    }
 
-   // alert( greetingOne.checkName(nameValue) );
-
-   if( greetingOne.displayError(nameValue) ) {
+   if( greetingsInstance.displayError(nameValue) ) {
       document.querySelector('.error').classList.add('showError');
       document.querySelector('.error').innerHTML = "Error in your input field"
       return false;
    } else {
       document.querySelector('.error').classList.remove('showError');
    }
-
-   var data = JSON.parse( localStorage.getItem('greetingNames') );
+  
+   //set the input fields
+   greetingsInstance.setName(nameValue);
+   //greetingsInstance.setNameObj();
 
    for(var i = 0; i < languageRaioElem.length; i++){
       var elem = languageRaioElem[i];
       if(elem.checked === true) {
-         if( (elem.value === "english") && nameValue !== "" ) {
-
-            if(localStorage.getItem('greetingNames')) {
-               greetingOne.saveName(nameValue);
-               greetingOne.setName(data);
-               greetingOne.checkName(nameValue);
-               localStorage.setItem( 'greetingNames', JSON.stringify(namesArr) );
-            
-            } else {
-               // alert("First appearance on the list");
-               // namesArr.push(nameObj);
-               // greetingOne.setCounter()
-               // localStorage.setItem( 'greetingNames', JSON.stringify(namesArr) );
-
-               greetingOne.saveName(nameValue);
-               localStorage.setItem( 'greetingNames', JSON.stringify(namesArr) );
-            }      
-
-            greetingOne.saveName(nameValue);
-
-            greetMsgElem.innerHTML = greetingOne.englishGreeting(nameValue);
+         if( (elem.value === "english") ) {
+            saveName();
+            greetMsgElem.innerHTML = greetingsInstance.englishGreeting();
             document.querySelector('.the_name').value = '';
-            count_textElem.innerHTML = greetingOne.getCounter();
-         } else if(elem.value === "afrikaans" && nameValue !== "") {
-            greetingOne.saveName(nameValue);
-            greetMsgElem.innerHTML = greetingOne.afrikaansGreeting(nameValue);
+            count_textElem.innerHTML = greetingsInstance.getCounter();
+         } else if( elem.value === "afrikaans" ) {
+            saveName();
+            greetMsgElem.innerHTML = greetingsInstance.afrikaansGreeting(nameValue);
             document.querySelector('.the_name').value = '';
-            count_textElem.innerHTML = greetingOne.getCounter();
-         } else if(elem.value === "isixhosa" && nameValue !== "") {
-            greetingOne.saveName(nameValue);
-            greetMsgElem.innerHTML = greetingOne.xhosaGreeting(nameValue);
+            count_textElem.innerHTML = greetingsInstance.getCounter();
+         } else if( elem.value === "isixhosa" ) {
+            saveName();
+            greetMsgElem.innerHTML = greetingsInstance.xhosaGreeting(nameValue);
             document.querySelector('.the_name').value = '';
-            count_textElem.innerHTML = greetingOne.getCounter();
+            count_textElem.innerHTML = greetingsInstance.getCounter();
          }
       }
    }
    count_textElem.innerHTML = localStorage.getItem('greetingsCounter');
 }
 
-function resetCounter() {
-   greetingOne.reset();
+function saveName() {
+   greetingsInstance.setNameObj();
+  
+   var data = JSON.parse( localStorage.getItem('greetingNames') );
+   var newObj = greetingsInstance.getNameObj();
+   var names = [];
+
+   if(localStorage.getItem('greetingNames')) {
+      if( greetingsInstance.checkName(data) ) {
+         //alert("repeated!!!!!!");
+         return;
+      } else {
+         //alert("no repeat")
+         names = JSON.parse(localStorage.getItem('greetingNames'));
+         names.push(newObj);
+         localStorage.setItem( 'greetingNames', JSON.stringify(names) );
+         storeCounter()
+      }
+   } else {
+      //alert("First appearance on the list");
+      names.push(newObj);
+      localStorage.setItem( 'greetingNames', JSON.stringify(names) );
+      storeCounter();
+   }      
 }
 
-// function addName(name) {
-  
-//    if(localStorage.getItem('greetingNames')) {
-//       var data = JSON.parse( localStorage.getItem('greetingNames') );
+function storeCounter() {
+   if(localStorage.getItem('greetingsCounter')) { // if there is greetingsCounter item on local storage
+      greetingsInstance.setCounter(localStorage.getItem('greetingsCounter'))
+      greetingsInstance.increaseCounter()
+      localStorage.setItem('greetingsCounter', greetingsInstance.getCounter());
+   } else { // if there is NO greetingsCounter item on local storage
+      greetingsInstance.increaseCounter();
+      //Create greetings counter on the local storage
+      localStorage.setItem('greetingsCounter', greetingsInstance.getCounter());   
+   }
+}
 
-//       for(let i = 0; i < data.length; i++) {
-//          var elem = data[i];
-//          var name = elem.name;
-         
-//          if (namesGreeted[name] === undefined){
-//             //add an entry for the user that was greeted in the Object Map
-//             namesGreeted[name] = 0;
-//          } else {
-//             namesGreeted[name]++;
-//          }
-//       }
-
-//       var name = theName.toLowerCase();
-
-//       for(var key in namesGreeted) {
-//          if(namesGreeted.hasOwnProperty(name)) {
-//             //alert(name + " already exists");
-//             return false;
-//          } else {
-//             if( localStorage.getItem('greetingNames') == null) {
-//                namesArr.push(nameObj);
-//                greetingOne.setCounter()
-//                localStorage.setItem('greetingNames', JSON.stringify(namesArr));
-      
-//             } else {
-//                namesArr = JSON.parse(localStorage.getItem('greetingNames'));
-//                namesArr.push(nameObj);
-//                greetingOne.setCounter()
-//                localStorage.setItem('greetingNames', JSON.stringify(namesArr));
-            
-//             }           
-//             break;
-//          }
-//       }    
-//    } else {
-//       //alert("First appearance on the list");
-//       namesArr.push(nameObj);
-//       greetingOne.setCounter()
-//       localStorage.setItem( 'greetingNames', JSON.stringify(namesArr) );
-//    }
-
-// }
+function resetCounter() {
+   localStorage.clear();
+   greetingsCounter = 0;
+   location.reload();
+}
 
 greetmeBtnElem.addEventListener('click', greetmeBtnClicked);
 
