@@ -66,7 +66,7 @@ const createGreetings = function() {
       var newName = getName();
       for(var key in namesGreeted) {
         if(namesGreeted.hasOwnProperty(newName)) {
-            alert(newName + " already exists");
+            //alert(newName + " already exists");
             isRepeated  = true;
             break;
         } 
@@ -92,7 +92,7 @@ const createGreetings = function() {
 
 var greetInstance = createGreetings();
 
-// greetInstance.setCounter(1);
+// greetInstance.setCounter(0);
 // greetInstance.increaseCounter();
 // greetInstance.increaseCounter();
 // alert(greetInstance.getCounter());
@@ -115,12 +115,12 @@ var greetInstance = createGreetings();
 // greetInstance.setName("Thanduxolo Nodwengu");
 // alert( greetInstance.xhosaGreeting() );
 
-//  alert( greetInstance.displayError("wewe") ); //false
+// alert( greetInstance.displayError("wewe") ); //false
 //  alert( greetInstance.displayError("") );     //true
 //  alert( greetInstance.displayError(5445) );   //true
 
-//  greetInstance.setName("Buli"); //false
-//  greetInstance.setName("zan"); //true
+ //greetInstance.setName("Buli"); //false
+ //greetInstance.setName("zan"); //true
 //  var names = [{name: 'kiro'}, {name: 'tedo'},{name: 'zan'}];
 //  alert( greetInstance.checkName(names) );
  

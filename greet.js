@@ -65,17 +65,14 @@ function saveName() {
 
    if(localStorage.getItem('greetingNames')) {
       if( greetingsInstance.checkName(data) ) {
-         //alert("repeated!!!!!!");
          return;
       } else {
-         //alert("no repeat")
          names = JSON.parse(localStorage.getItem('greetingNames'));
          names.push(newObj);
          localStorage.setItem( 'greetingNames', JSON.stringify(names) );
          storeCounter()
       }
    } else {
-      //alert("First appearance on the list");
       names.push(newObj);
       localStorage.setItem( 'greetingNames', JSON.stringify(names) );
       storeCounter();
